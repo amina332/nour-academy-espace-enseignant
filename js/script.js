@@ -105,3 +105,9 @@ function afficherEleves() {
 }
 
 afficherEleves();
+
+const recherche = document.getElementById("recherche")
+const filtre_groupe = document.getElementById("filtre-groupe")
+filtre_groupe.addEventListener("change", () => {
+
+})
