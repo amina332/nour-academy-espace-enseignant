@@ -88,8 +88,8 @@ function creerLigne(eleve) {
     return li;
 }
 
-const listeEleves = document.getElementById("liste-eleves");
-const compteur = document.getElementById("compteur");
+    const listeEleves = document.getElementById("liste-eleves");
+    const compteur = document.getElementById("compteur");
 
 function afficherEleves() {
 
@@ -106,8 +106,61 @@ function afficherEleves() {
 
 afficherEleves();
 
-const recherche = document.getElementById("recherche")
-const filtre_groupe = document.getElementById("filtre-groupe")
+    const recherche = document.getElementById("recherche")
+    const filtre_groupe = document.getElementById("filtre-groupe")
 filtre_groupe.addEventListener("change", () => {
+let groupeChoisi = filtre_groupe.value;
+ let elevesFiltres = eleves.filter((eleve) => {
+        return eleve.groupeId == groupeChoisi;
+    });
+    console.log(elevesFiltres);
+});
 
-})
+    const filtreGroupe = document.getElementById("filtre-groupe");
+    const aucunResultat = document.getElementById("aucun-resultat");
+
+function afficherGroupes() {
+    groupes.forEach(groupe => {
+        const option = document.createElement("option");
+
+        option.value = groupe.id;
+        option.textContent = groupe.nom;
+
+        filtreGroupe.appendChild(option);
+    });
+}
+function afficherEleves() {
+
+    const groupeSelectionne = filtreGroupe.value;
+    const rechercheTexte = recherche.value.trim().toLowerCase();
+
+    const elevesFiltres = eleves.filter(eleve => {
+
+        const correspondGroupe =
+            groupeSelectionne === "" ||
+            eleve.groupeId === Number(groupeSelectionne);
+
+        const nomComplet =
+            `${eleve.prenom} ${eleve.nom}`.toLowerCase();
+
+        const correspondRecherche =
+            nomComplet.includes(rechercheTexte);
+
+        return correspondGroupe && correspondRecherche;
+    });
+
+    listeEleves.replaceChildren();
+
+    const lignes = elevesFiltres.map(creerLigne);
+
+    lignes.forEach(ligne => {
+        listeEleves.appendChild(ligne);
+    });
+
+    compteur.textContent = `${elevesFiltres.length} élèves`;
+
+    aucunResultat.hidden = elevesFiltres.length !== 0;
+}
+recherche.addEventListener("input", afficherEleves);
+
+filtreGroupe.addEventListener("change", afficherEleves);
