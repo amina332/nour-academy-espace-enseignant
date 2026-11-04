@@ -104,6 +104,15 @@
         boutonFiche.append(avatar, informations, moyenneElement);
 
         container.append(boutonFiche);
+        
+        const buttonAbsent = document.createElement("button");
+        buttonAbsent.type = "button";
+        buttonAbsent.textContent = "absent";
+        buttonAbsent.dataset.action = "absent";
+        buttonAbsent.classList.add(
+            "btn-absent" , "rounded-full" , "border" ,  "px-3" , "py-2"
+        );
+          container.append(buttonAbsent)
 
         li.append(container);
 
@@ -170,3 +179,7 @@
     recherche.addEventListener("input", afficherEleves);
 
     filtreGroupe.addEventListener("change", afficherEleves);
+
+    listeEleves.addEventListener("click", (event) =>{
+
+    })
