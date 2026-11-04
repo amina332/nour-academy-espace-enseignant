@@ -126,6 +126,10 @@
 
         container.append(inputNote, buttonNote);
 
+        const messageNote =document.createElement("p")
+        messageNote.textContent = ""
+        messageNote.hidden = true;
+        container.append(messageNote)
         li.append(container);
 
         return li;
@@ -194,20 +198,41 @@
 
     listeEleves.addEventListener("click", (event) =>{
 
-        const button = event.target.closest("[data-action]")
-        if (!bouton) {
+        const button = event.target.closest("[data-action]");
+        if (!button) {
         return;
     }
 
-    const ligne = bouton.closest("li");
+    const ligne = button.closest("li");
 
     const id = Number(ligne.dataset.id);
 
     const eleve = eleves.find(e => e.id === id);
-    if (bouton.dataset.action === "absent") {
+    if (button.dataset.action === "absent") {
         eleve.absences++
-        const novelleLigne = creerLigne(eleve);
+        const nouvelleLigne = creerLigne(eleve);
         ligne.replaceWith(nouvelleLigne);
     }
+else if (button.dataset.action === "note") {
 
+    const inputNote = ligne.querySelector(".input-note");
+
+    const messageNote = ligne.querySelector("p");
+
+    const valeur = inputNote.value.trim();
+
+    const note = Number(valeur);
+
+    if (valeur === "" || note < 0 || note > 20) {
+        messageNote.textContent = "La note doit être entre 0 et 20.";
+    
+        messageNote.hidden = false;
+        return;
+    }
+
+    eleve.notes.push(note);
+
+    const nouvelleLigne = creerLigne(eleve);
+    ligne.replaceWith(nouvelleLigne);
+}
     })
