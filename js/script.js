@@ -114,6 +114,18 @@
         );
           container.append(buttonAbsent)
 
+          const inputNote = document.createElement("input");
+          inputNote.type = "number";
+          inputNote.placeholder = "note / 20";
+          inputNote.classList.add("input-note");
+          const buttonNote = document.createElement("button");
+
+        buttonNote.type = "button";
+        buttonNote.textContent = "Ajouter la note";
+        buttonNote.dataset.action = "note";
+
+        container.append(inputNote, buttonNote);
+
         li.append(container);
 
         return li;
@@ -181,5 +193,21 @@
     filtreGroupe.addEventListener("change", afficherEleves);
 
     listeEleves.addEventListener("click", (event) =>{
+
+        const button = event.target.closest("[data-action]")
+        if (!bouton) {
+        return;
+    }
+
+    const ligne = bouton.closest("li");
+
+    const id = Number(ligne.dataset.id);
+
+    const eleve = eleves.find(e => e.id === id);
+    if (bouton.dataset.action === "absent") {
+        eleve.absences++
+        const novelleLigne = creerLigne(eleve);
+        ligne.replaceWith(nouvelleLigne);
+    }
 
     })
