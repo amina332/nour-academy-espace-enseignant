@@ -325,6 +325,16 @@
    const email_input = document.getElementById("email");
    const code_input = document.getElementById("code");
 
+   function afficherGroupesDesFormulaires() {  /*afficher les groupes das le formulaire */
+groupes.forEach(groupe => {
+        const option = document.createElement("option");
+        option.value = groupe.id;
+        option.textContent = groupe.nom;
+        groupe_input.appendChild(option);
+    });
+   }
+   afficherGroupesDesFormulaires();
+
    function verifierTelephone() {   /*verification de tel */
     const telephone = telephone_input.value.trim();
 
@@ -417,10 +427,10 @@ function verifierGroupe() {
         groupe_input.parentElement.classList.remove("erreur");
 
     }else {
-        nom_message.textContent = "choisis un groupe";
+        groupe_message.textContent = "choisis un groupe";
 
-        nom_input.parentElement.classList.add("erreur");
-        nom_input.parentElement.classList.remove("valide");
+        groupe_input.parentElement.classList.add("erreur");
+        groupe_input.parentElement.classList.remove("valide");
     }
 }
 groupe_input.addEventListener("change", verifierGroupe);
