@@ -319,14 +319,89 @@
     });
 
    const telephone_input = document.getElementById("telephone")
-   function verifierTelephone() {
+   const prenom_input = document.getElementById("prenom");
+   const nom_input = document.getElementById("nom");
+   const groupe_input = document.getElementById("groupe");
+   const email_input = document.getElementById("email");
+   const code_input = document.getElementById("code");
+
+   function verifierTelephone() {   /*verification de tel */
     const telephone = telephone_input.value.trim();
 
     const tel_message = document.getElementById("telephone-msg");
 
     const regex = /^(0[67]\d{8}|\+212[67]\d{8})$/;
 
-    if (!regex.test(telephone)) {
-        tel_message.classList.remove("hidden");
+    if (regex.test(telephone)) {
+        tel_message.textContent = "Telephone valide";
+        telephone_input.parentElement.classList.add("valide");
+        telephone_input.parentElement.classList.remove("erreur");
+
+    } else {
+        tel_message.textContent = "Numéro de telephone invalide";
+        telephone_input.parentElement.classList.add("erreur");
+        telephone_input.parentElement.classList.remove("valide");
     }
 }
+telephone_input.addEventListener("input", verifierTelephone);
+
+function verifierEmail() {   /*verification d email */
+    const email_message = document.getElementById("email-msg");
+    const email = email_input.value.trim();
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (regex.test(email)) {
+        email_message.textContent = "Email valide";
+
+        email_input.parentElement.classList.add("valide");
+        email_input.parentElement.classList.remove("erreur");
+
+    } else {
+        email_message.textContent = "Email invalide";
+
+        email_input.parentElement.classList.add("erreur");
+        email_input.parentElement.classList.remove("valide");
+    }
+}
+email_input.addEventListener("input", verifierEmail);
+
+function verifierPrenom() {
+    const prenom_message = document.getElementById("prenom-msg")
+    const prenom = prenom_input.value.trim();
+    const regex = /^[A-Za-zÀ-ÿ -]{2,}$/;
+
+    if (regex.test(prenom)){
+         prenom_message.textContent = "prenom valide";
+
+        prenom_input.parentElement.classList.add("valide");
+        prenom_input.parentElement.classList.remove("erreur");
+
+    }else {
+        prenom_message.textContent = "preno invalide";
+
+        prenom_input.parentElement.classList.add("erreur");
+        prenom_input.parentElement.classList.remove("valide");
+    }
+}
+prenom_input.addEventListener("input", verifierPrenom);
+
+function verifierNom() {
+    const nom_message = document.getElementById("nom-msg")
+    const nom = nom_input.value.trim();
+    const regex = /^[A-Za-zÀ-ÿ -]{2,}$/;
+
+    if (regex.test(nom)){
+         nom_message.textContent = "nom valide";
+
+        nom_input.parentElement.classList.add("valide");
+        nom_input.parentElement.classList.remove("erreur");
+
+    }else {
+        nom_message.textContent = "preno invalide";
+
+        nom_input.parentElement.classList.add("erreur");
+        nom_input.parentElement.classList.remove("valide");
+    }
+}
+nom_input.addEventListener("input", verifierNom);
