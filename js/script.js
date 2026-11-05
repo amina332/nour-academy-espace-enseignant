@@ -398,10 +398,29 @@ function verifierNom() {
         nom_input.parentElement.classList.remove("erreur");
 
     }else {
-        nom_message.textContent = "preno invalide";
+        nom_message.textContent = "nom invalide";
 
         nom_input.parentElement.classList.add("erreur");
         nom_input.parentElement.classList.remove("valide");
     }
 }
 nom_input.addEventListener("input", verifierNom);
+
+function verifierGroupe() {
+    const groupe_message = document.getElementById("groupe-msg")
+    const groupe = groupe_input.value;
+    
+    if (groupe !== ""){
+         groupe_message.textContent = "groupe valide";
+
+        groupe_input.parentElement.classList.add("valide");
+        groupe_input.parentElement.classList.remove("erreur");
+
+    }else {
+        nom_message.textContent = "choisis un groupe";
+
+        nom_input.parentElement.classList.add("erreur");
+        nom_input.parentElement.classList.remove("valide");
+    }
+}
+groupe_input.addEventListener("change", verifierGroupe);
