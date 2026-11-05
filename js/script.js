@@ -317,3 +317,150 @@
 
         ligne.replaceWith(creerLigne(eleve)); /*seule cette ligne est mise a jour */
     });
+
+   const telephone_input = document.getElementById("telephone")
+   const prenom_input = document.getElementById("prenom");
+   const nom_input = document.getElementById("nom");
+   const groupe_input = document.getElementById("groupe");
+   const email_input = document.getElementById("email");
+   const code_input = document.getElementById("code");
+
+   function afficherGroupesDesFormulaires() {  /*afficher les groupes das le formulaire */
+groupes.forEach(groupe => {
+        const option = document.createElement("option");
+        option.value = groupe.id;
+        option.textContent = groupe.nom;
+        groupe_input.appendChild(option);
+    });
+   }
+   afficherGroupesDesFormulaires();
+
+   function verifierTelephone() {   /*verification de tel */
+    const telephone = telephone_input.value.trim();
+
+    const tel_message = document.getElementById("telephone-msg");
+
+    const regex = /^(0[67]\d{8}|\+212[67]\d{8})$/;
+
+    if (regex.test(telephone)) {
+        tel_message.textContent = "Telephone valide";
+        telephone_input.parentElement.classList.add("valide");
+        telephone_input.parentElement.classList.remove("erreur");
+
+    } else {
+        tel_message.textContent = "Numéro de telephone invalide";
+        telephone_input.parentElement.classList.add("erreur");
+        telephone_input.parentElement.classList.remove("valide");
+    }
+}
+telephone_input.addEventListener("input", verifierTelephone);
+
+function verifierEmail() {   /*verification d email */
+    const email_message = document.getElementById("email-msg");
+    const email = email_input.value.trim();
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (regex.test(email)) {
+        email_message.textContent = "Email valide";
+
+        email_input.parentElement.classList.add("valide");
+        email_input.parentElement.classList.remove("erreur");
+
+    } else {
+        email_message.textContent = "Email invalide";
+
+        email_input.parentElement.classList.add("erreur");
+        email_input.parentElement.classList.remove("valide");
+    }
+}
+email_input.addEventListener("input", verifierEmail);
+
+function verifierPrenom() {
+    const prenom_message = document.getElementById("prenom-msg")
+    const prenom = prenom_input.value.trim();
+    const regex = /^[A-Za-zÀ-ÿ -]{2,}$/;
+
+    if (regex.test(prenom)){
+         prenom_message.textContent = "prenom valide";
+
+        prenom_input.parentElement.classList.add("valide");
+        prenom_input.parentElement.classList.remove("erreur");
+
+    }else {
+        prenom_message.textContent = "preno invalide";
+
+        prenom_input.parentElement.classList.add("erreur");
+        prenom_input.parentElement.classList.remove("valide");
+    }
+}
+prenom_input.addEventListener("input", verifierPrenom);
+
+function verifierNom() {
+    const nom_message = document.getElementById("nom-msg")
+    const nom = nom_input.value.trim();
+    const regex = /^[A-Za-zÀ-ÿ -]{2,}$/;
+
+    if (regex.test(nom)){
+         nom_message.textContent = "nom valide";
+
+        nom_input.parentElement.classList.add("valide");
+        nom_input.parentElement.classList.remove("erreur");
+
+    }else {
+        nom_message.textContent = "nom invalide";
+
+        nom_input.parentElement.classList.add("erreur");
+        nom_input.parentElement.classList.remove("valide");
+    }
+}
+nom_input.addEventListener("input", verifierNom);
+
+function verifierGroupe() {
+    const groupe_message = document.getElementById("groupe-msg")
+    const groupe = groupe_input.value;
+
+    if (groupe !== ""){
+         groupe_message.textContent = "groupe valide";
+
+        groupe_input.parentElement.classList.add("valide");
+        groupe_input.parentElement.classList.remove("erreur");
+
+    }else {
+        groupe_message.textContent = "choisis un groupe";
+
+        groupe_input.parentElement.classList.add("erreur");
+        groupe_input.parentElement.classList.remove("valide");
+    }
+}
+groupe_input.addEventListener("change", verifierGroupe);
+
+function verifierCode (){
+    const code_message = document.getElementById("code-msg");
+    const code = code_input.value.trim();
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    if (regex.test(code)){
+         code_message.textContent = "code valide";
+
+        code_input.parentElement.classList.add("valide");
+        code_input.parentElement.classList.remove("erreur");
+
+    }else {
+        code_message.textContent = "code invalide : besoins de 8 caracteres minimum, 1 majuscule, 1 chiffre et 1 symbole";
+
+        code_input.parentElement.classList.add("erreur");
+        code_input.parentElement.classList.remove("valide");
+    }
+}
+code_input.addEventListener("input", verifierCode);
+
+const champs = [   /*les champs */
+    nom_input, prenom_input, code_input, email_input, telephone_input, groupe_input
+]
+
+function champsValides() {   /*verifier les champs soit corrects */
+return champs.every(champ =>
+        champ.parentElement.classList.contains("valide")
+    );
+}
