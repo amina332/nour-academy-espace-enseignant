@@ -317,3 +317,16 @@
 
         ligne.replaceWith(creerLigne(eleve)); /*seule cette ligne est mise a jour */
     });
+
+   const telephone_input = document.getElementById("telephone")
+   function verifierTelephone() {
+    const telephone = telephone_input.value.trim();
+
+    const tel_message = document.getElementById("telephone-msg");
+
+    const regex = /^(0[67]\d{8}|\+212[67]\d{8})$/;
+
+    if (!regex.test(telephone)) {
+        tel_message.classList.remove("hidden");
+    }
+}
