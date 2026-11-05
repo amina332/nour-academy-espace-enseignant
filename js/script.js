@@ -444,3 +444,13 @@ function verifierCode (){
     }
 }
 code_input.addEventListener("input", verifierCode);
+
+const champs = [   /*les champs */
+    nom_input, prenom_input, code_input, email_input, telephone_input, groupe_input
+]
+
+function champsValides() {   /*verifier les champs soit corrects */
+return champs.every(champ =>
+        champ.parentElement.classList.contains("valide")
+    );
+}
