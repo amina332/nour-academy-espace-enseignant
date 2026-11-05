@@ -409,7 +409,7 @@ nom_input.addEventListener("input", verifierNom);
 function verifierGroupe() {
     const groupe_message = document.getElementById("groupe-msg")
     const groupe = groupe_input.value;
-    
+
     if (groupe !== ""){
          groupe_message.textContent = "groupe valide";
 
@@ -424,3 +424,23 @@ function verifierGroupe() {
     }
 }
 groupe_input.addEventListener("change", verifierGroupe);
+
+function verifierCode (){
+    const code_message = document.getElementById("code-msg");
+    const code = code_input.value.trim();
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    if (regex.test(code)){
+         code_message.textContent = "code valide";
+
+        code_input.parentElement.classList.add("valide");
+        code_input.parentElement.classList.remove("erreur");
+
+    }else {
+        code_message.textContent = "code invalide : besoins de 8 caracteres minimum, 1 majuscule, 1 chiffre et 1 symbole";
+
+        code_input.parentElement.classList.add("erreur");
+        code_input.parentElement.classList.remove("valide");
+    }
+}
+code_input.addEventListener("input", verifierCode);
