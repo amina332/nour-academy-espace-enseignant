@@ -1,5 +1,5 @@
 
-const groupes = [
+export const groupes = [
     {
         id: 1,
         nom: "2e Bac — Mathématiques",
@@ -16,7 +16,7 @@ const groupes = [
         cours: "Sciences"
     }
 ];
-const eleves = [
+export const eleves = [
     {
         id: 1,
         prenom: "Sara",
