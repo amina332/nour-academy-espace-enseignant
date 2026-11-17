@@ -1,3 +1,4 @@
+    import { groupes, eleves } from "./data.js";
     const listeEleves = document.getElementById("liste-eleves");
     const compteur = document.getElementById("compteur");
     const recherche = document.getElementById("recherche");
